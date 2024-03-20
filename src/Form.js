@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, CircularProgress, TextField } from '@mui/material';
+import { Button, CircularProgress, Input, TextField } from '@mui/material';
 
 const Form = () => {
   const [formData, setFormData] = useState({ name: '', job: '', resume: null });
@@ -46,55 +46,61 @@ const Form = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <TextField
-        name="name"
-        label="Name"
-        value={formData.name}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        name="job"
-        label="Job"
-        value={formData.job}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-        variant="outlined"
-      />
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-        id="resume-upload"
-      />
-      <label htmlFor="resume-upload">
-        <Button variant="contained" color="primary" component="span">
-          Upload Resume
-        </Button>
-      </label>
-      <br />
-      <br />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-        disabled={loading || !formData.name || !formData.job || !formData.resume}
-      >
-        {loading ? <CircularProgress size={24} /> : 'Submit'}
-      </Button>
-      {downloadUrl && (
-        <div>
-          <Button variant="contained" color="secondary" onClick={handleDownload}>
-            Download Report
+<div className=" flex justify-center items-center h-screen" style={{ textAlign: 'center', padding: '20px' }}>
+            <div className="container bg-slate-700  p-8 border-b-8 border-red-500 shadow-lg">
+                <div className="space-y-4" style={{ textAlign: 'center', padding: '20px' }}>
+        <TextField
+          name="name"
+          label="Name"
+          className='bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500'
+          value={formData.name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField 
+          className='bg-green-50 border border-[#ee6d21] text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500'
+          name="job"
+          label="Job"
+          value={formData.job}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          variant="outlined"
+        />
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+          id="resume-upload"
+        />
+        <div className='grid md:grid-cols-2 md:gap-6'>
+        <label htmlFor="resume-upload">
+          <Button variant="outlined" className='m-4' component="span">
+            Upload Resume
+          </Button>
+          </label>
+
+          <Button
+            variant="outlined"
+            onClick={handleSubmit}
+            disabled={loading || !formData.name || !formData.job || !formData.resume}
+          >
+            {loading ? <CircularProgress size={24} /> : 'Submit'}
           </Button>
         </div>
+        {downloadUrl && (
+          <div>
+            <Button className='' onClick={handleDownload}>
+              Download Report
+            </Button>
+        </div>
       )}
-    </div>
+                </div>
+            </div>
+        </div>
   );
 };
 
